@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>scroll animation</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        overflow-x: hidden;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        transition: all 19s;
+
+      }
+      h1 {
+        margin-bottom: 50px;
+        padding-top: 100px;
+      }
+      .contaner {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .content {
+        width: 400px;
+        height: 200px;
+        margin: 10px;
+        border-radius: 6px;
+        background-color: rgb(3, 72, 12);
+        transform: translateX(400%);
+        transition: transform 0.5s ease;
+        display: grid;
+        place-items: center;
+        font-size: 30px;
+      }
+      .content:nth-of-type(even) {
+        transform: translateX(-400%);
+      }
+      .content.show {
+        transform: translateX(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contaner">
+      <h1>Scroll to see the animation</h1>
+      <div class="content">content</div>
+      <div class="content">content</div>
+      <div class="content">content</div>
+      <div class="content">content</div>
+      <div class="content">content</div>
+      <div class="content">content</div>
+      <div class="content">content</div>
+      <div class="content">content</div>
+      <div class="content">content</div>
+      <div class="content">content</div>
+      <div class="content">content</div>
+      <div class="content">content</div>
+      <div class="content">content</div>
+    </div>
+    <script>
+      let content = document.querySelectorAll(".content");
+      let body = document.querySelector('body');
+      console.log(body);
+      content.forEach((box) => {
+        if (window.scrollY == 1 && box.offsetTop < window.innerHeight) {
+          box.classList.add("show");
+          
+
+        }
+      });
+      window.addEventListener("scroll", (e) => {
+        content.forEach((element) => {
+          if (element.offsetTop < (window.innerHeight + window.scrollY) / 1.2) {
+            element.classList.add("show");
+            body.style.backgroundColor = 'rgb(0, 0, 0)'
+            body.style.color = 'white'
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
